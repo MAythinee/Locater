@@ -3,7 +3,9 @@ import 'dart:ffi';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:locater/screens/home.dart';
+import 'package:locater/screens/information.dart';
 import 'package:locater/screens/my_style.dart';
+import 'package:locater/screens/show_list_food.dart';
 
 class MyService extends StatefulWidget {
   @override
@@ -15,6 +17,7 @@ class _MyServiceState extends State<MyService> {
 
   String loginString = '';
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  Widget currenWidget = ShowListFood();
 
 // Method
   @override
@@ -46,8 +49,10 @@ class _MyServiceState extends State<MyService> {
 
   Future<void> mySignOut() async {
     await firebaseAuth.signOut().then((response) {
-      MaterialPageRoute materialPageRoute = MaterialPageRoute(builder: (BuildContext context) => Home());
-      Navigator.of(context).pushAndRemoveUntil(materialPageRoute, (Route<dynamic> route) => false);
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => Home());
+      Navigator.of(context).pushAndRemoveUntil(
+          materialPageRoute, (Route<dynamic> route) => false);
     });
   }
 
@@ -58,7 +63,12 @@ class _MyServiceState extends State<MyService> {
         color: Colors.blue,
       ),
       title: Text('Information'),
-      subtitle: Text('Information of user login'),
+      subtitle: Text('Information of user login'),onTap: (){
+        setState(() { // ป๊อบอัพไปอีกหน้า
+          currenWidget = Information();
+        });
+        Navigator.of(context).pop();
+      },
     );
   }
 
@@ -70,6 +80,12 @@ class _MyServiceState extends State<MyService> {
       ),
       title: Text('Show List'),
       subtitle: Text('Show all food in Locater'),
+      onTap: () {
+        setState(() {
+          currenWidget = ShowListFood();
+        });
+        Navigator.of(context).pop();
+      },
     );
   }
 
@@ -139,7 +155,7 @@ class _MyServiceState extends State<MyService> {
         backgroundColor: MyStyle().myMainColor,
         title: Text('My Service'),
       ),
-      body: Text('body'),
+      body: currenWidget,
       drawer: myDrawerMenu(),
     );
   }
