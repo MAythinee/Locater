@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:locater/screens/my_services.dart';
 import 'package:locater/screens/my_style.dart';
 import 'package:locater/screens/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
   //ถ่ายเท data
@@ -12,6 +14,22 @@ class _HomeState extends State<Home> {
 // Explicit
 
 // Method
+
+  @override
+  void initState(){
+    super.initState(); //ทำงานก่อน build
+    chaekStatus();
+  }
+
+  Future<void> chaekStatus()async{
+    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    FirebaseUser firebaseUser = await firebaseAuth.currentUser();
+    if (firebaseUser != null) {
+
+      MaterialPageRoute materialPageRoute = MaterialPageRoute(builder: (BuildContext context) => MyService());
+      Navigator.of(context).pushAndRemoveUntil(materialPageRoute, (Route <dynamic> route) => false);
+    }
+  }
 
   Widget singUpButton() {
     return Expanded(
