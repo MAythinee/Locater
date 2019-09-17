@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:locater/models/food_model.dart';
+import 'package:locater/screens/detail_food.dart';
 import 'package:locater/screens/my_style.dart';
 
 class ShowListFood extends StatefulWidget {
@@ -52,16 +53,23 @@ class _ShowListFoodState extends State<ShowListFood> {
     return ListView.builder(
       itemCount: foodModels.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          decoration: index % 2 == 0
-              ? BoxDecoration(color: Colors.orange[100])
-              : BoxDecoration(color: Colors.orange[300]),
-          child: Row(
-            children: <Widget>[
-              showFoodImage(index),
-              showText(index),
-            ],
+        return GestureDetector(
+          child: Container(
+            decoration: index % 2 == 0
+                ? BoxDecoration(color: Colors.orange[100])
+                : BoxDecoration(color: Colors.orange[300]),
+            child: Row(
+              children: <Widget>[
+                showFoodImage(index),
+                showText(index),
+              ],
+            ),
           ),
+          onTap: () {
+            MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                builder: (BuildContext context) => DetailFood(foodModel: foodModels[index],)); // ตัวส่งโมเดลไปยัง key
+            Navigator.of(context).push(materialPageRoute);
+          },
         );
       },
     );
