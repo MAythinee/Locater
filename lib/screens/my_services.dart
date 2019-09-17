@@ -26,7 +26,7 @@ class _MyServiceState extends State<MyService> {
     findDisplayName();
   }
 
-  Future<Void> findDisplayName() async {
+  Future<void> findDisplayName() async {
     FirebaseUser firebaseUser = await firebaseAuth.currentUser();
     setState(() {
       loginString = firebaseUser.displayName;
@@ -64,10 +64,10 @@ class _MyServiceState extends State<MyService> {
       ),
       title: Text('Information'),
       subtitle: Text('Information of user login'),onTap: (){
-        setState(() { // ป๊อบอัพไปอีกหน้า
-          currenWidget = Information();
-        });
-        Navigator.of(context).pop();
+        setState(() {                       // ป๊อบอัพไปอีกหน้า
+          currenWidget = Information();     // ป๊อบอัพไปอีกหน้า
+        });                                 // ป๊อบอัพไปอีกหน้า
+        Navigator.of(context).pop();        // ป๊อบอัพไปอีกหน้า
       },
     );
   }
@@ -140,8 +140,8 @@ class _MyServiceState extends State<MyService> {
       child: ListView(
         children: <Widget>[
           myHeadDrawer(),
-          menuShowListFood(), Divider(), //ใส่เส้นแบ่ง
-          menuInformation(),
+          menuShowListFood(), Divider(),      //ใส่เส้นแบ่ง
+          menuInformation(), Divider(),
           processSignOut(),
         ],
       ),
