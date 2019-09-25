@@ -12,21 +12,29 @@ class _AddFoodState extends State<AddFood> {
 // Explitcit
 
   File file;
+  final formKey = GlobalKey<FormState>();
 
 // Method
   Widget nameFoodText() {
     Color color = Colors.purpleAccent;
     return TextFormField(
       decoration: InputDecoration(
-          icon: Icon(
-            Icons.fastfood,
-            color: color,
-            size: 36.0,
-          ),
-          labelText: 'ชื่ออาหาร',
-          labelStyle: TextStyle(color: color),
-          helperText: 'กรุณากรอกชื่ออาหาร',
-          helperStyle: TextStyle(color: color)),
+        icon: Icon(
+          Icons.fastfood,
+          color: color,
+          size: 36.0,
+        ),
+        labelText: 'ชื่ออาหาร',
+        labelStyle: TextStyle(color: color),
+        helperText: 'กรุณากรอกชื่ออาหาร',
+        helperStyle: TextStyle(color: color),
+      ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'กรุณากรอกชื่ออาหารด้วยค่ะ';
+        } else {}
+      },
+      onSaved: (String value) {},
     );
   }
 
@@ -34,15 +42,22 @@ class _AddFoodState extends State<AddFood> {
     Color color = Colors.pinkAccent;
     return TextFormField(
       decoration: InputDecoration(
-          icon: Icon(
-            Icons.home,
-            color: color,
-            size: 36.0,
-          ),
-          labelText: 'ชื่อร้านอาหาร',
-          labelStyle: TextStyle(color: color),
-          helperText: 'กรุณากรอกชื่อร้านอาหาร',
-          helperStyle: TextStyle(color: color)),
+        icon: Icon(
+          Icons.home,
+          color: color,
+          size: 36.0,
+        ),
+        labelText: 'ชื่อร้านอาหาร',
+        labelStyle: TextStyle(color: color),
+        helperText: 'กรุณากรอกชื่อร้านอาหาร',
+        helperStyle: TextStyle(color: color),
+      ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'กรุณากรอกชื่อร้านอาหารด้วยค่ะ';
+        } else {}
+      },
+      onSaved: (String value) {},
     );
   }
 
@@ -52,15 +67,22 @@ class _AddFoodState extends State<AddFood> {
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       decoration: InputDecoration(
-          icon: Icon(
-            Icons.email,
-            color: color,
-            size: 36.0,
-          ),
-          labelText: 'ที่อยู่ร้านอาหาร',
-          labelStyle: TextStyle(color: color),
-          helperText: 'กรุณากรอกที่อยู่ร้านอาหาร',
-          helperStyle: TextStyle(color: color)),
+        icon: Icon(
+          Icons.email,
+          color: color,
+          size: 36.0,
+        ),
+        labelText: 'ที่อยู่ร้านอาหาร',
+        labelStyle: TextStyle(color: color),
+        helperText: 'กรุณากรอกที่อยู่ร้านอาหาร',
+        helperStyle: TextStyle(color: color),
+      ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'กรุณากรอกที่อยู่ร้านอาหารด้วยค่ะ';
+        } else {}
+      },
+      onSaved: (String value) {},
     );
   }
 
@@ -70,15 +92,22 @@ class _AddFoodState extends State<AddFood> {
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       decoration: InputDecoration(
-          icon: Icon(
-            Icons.details,
-            color: color,
-            size: 36.0,
-          ),
-          labelText: 'รายละเอียด',
-          labelStyle: TextStyle(color: color),
-          helperText: 'กรุณากรอกรายละเอียดร้านอาหาร',
-          helperStyle: TextStyle(color: color)),
+        icon: Icon(
+          Icons.details,
+          color: color,
+          size: 36.0,
+        ),
+        labelText: 'รายละเอียด',
+        labelStyle: TextStyle(color: color),
+        helperText: 'กรุณากรอกรายละเอียดร้านอาหาร',
+        helperStyle: TextStyle(color: color),
+      ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'กรุณากรอกรายละเอียดด้วยค่ะ';
+        } else {}
+      },
+      onSaved: (String value) {},
     );
   }
 
@@ -124,29 +153,54 @@ class _AddFoodState extends State<AddFood> {
     );
   }
 
+  Widget uploadeButton() {
+    return Container(
+      margin: EdgeInsets.only(left: 40.0, right: 40.0),
+      child: RaisedButton.icon(
+        icon: Icon(Icons.cloud_upload),
+        label: Text('Upload Value'),
+        onPressed: () {
+          if (formKey.currentState.validate()) {
+            formKey.currentState.save();
+          }
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.all(30.0),
-      children: <Widget>[
-        nameFoodText(),
-        nameShopText(),
-        nameAddressText(),
-        nameDetailText(),
-        SizedBox(
-          height: 16.0,
-        ),
-        showFoodImage(),
-        SizedBox(
-          height: 16.0,
-        ),
-        galleryButton(),
-        SizedBox(
-          height: 16.0,
-        ),
-        showLat(),
-        showLng(),
-      ],
+    return Form(
+      key: formKey,
+      child: ListView(
+        padding: EdgeInsets.all(30.0),
+        children: <Widget>[
+          nameFoodText(),
+          nameShopText(),
+          nameAddressText(),
+          nameDetailText(),
+          SizedBox(
+            height: 16.0,
+          ),
+          showFoodImage(),
+          SizedBox(
+            height: 16.0,
+          ),
+          galleryButton(),
+          SizedBox(
+            height: 16.0,
+          ),
+          showLat(),
+          showLng(),
+          SizedBox(
+            height: 16.0,
+          ),
+          uploadeButton(),
+          SizedBox(
+            height: 30.0,
+          )
+        ],
+      ),
     );
   }
 }
