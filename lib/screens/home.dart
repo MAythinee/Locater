@@ -127,6 +127,9 @@ class _HomeState extends State<Home> {
           ),
           labelText: 'Email :',
         ),
+         style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
         onSaved: (String value) {
           emailString = value.trim();
         },
@@ -146,6 +149,9 @@ class _HomeState extends State<Home> {
           ),
           labelText: 'Password :',
         ),
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
         onSaved: (String value) {
           passwordString = value.trim();
         },
@@ -163,9 +169,9 @@ class _HomeState extends State<Home> {
 
   Widget showAppName() {
     return Text(
-      'Locater',
+      'LOCATER',
       style: TextStyle(
-        fontSize: 30.0,
+        fontSize: 25.0,
         fontWeight: FontWeight.bold,
         color: Colors.red[300],
       ),
@@ -179,10 +185,11 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            gradient: RadialGradient(
-              colors: [Colors.white, MyStyle().myMainColor],
-              radius: 1.0,
-            ),
+            color: Colors.deepOrange[200],
+            // gradient: RadialGradient(
+            //   colors: [Colors.white, MyStyle().myMainColor],
+            //   radius: 1.0,
+            // ),
           ),
           child: Center(
             child: Form(

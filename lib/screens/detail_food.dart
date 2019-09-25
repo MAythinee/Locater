@@ -32,7 +32,7 @@ class _DetailFoodState extends State<DetailFood> {
   }
 
   Widget showAddressShop() {
-    return Text('Address : ${myFoodModel.address}',
+    return Text('ที่อยู่ : ${myFoodModel.address}',
         style: TextStyle(
           fontSize: MyStyle().h2,
         ));
@@ -55,7 +55,7 @@ class _DetailFoodState extends State<DetailFood> {
   Widget showImageFood() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.width * 0.6,
       padding: EdgeInsets.all(20.0),
       child: Image.network(
         myFoodModel.pathURL,
@@ -83,9 +83,9 @@ class _DetailFoodState extends State<DetailFood> {
       children: <Widget>[
         showNameFood(),
         showImageFood(),
-        showNameShop(),
-        showAddressShop(),
-        showTimeShop(),
+        showNameShop(),Divider(),
+        showAddressShop(),Divider(),
+        showTimeShop(),Divider(),
         showDetailFood(),
       ],
     );

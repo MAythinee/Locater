@@ -7,6 +7,7 @@ import 'package:locater/screens/information.dart';
 import 'package:locater/screens/my_style.dart';
 import 'package:locater/screens/show_list_food.dart';
 
+
 class MyService extends StatefulWidget {
   @override
   _MyServiceState createState() => _MyServiceState();
@@ -64,6 +65,22 @@ class _MyServiceState extends State<MyService> {
       ),
       title: Text('Information'),
       subtitle: Text('Information of user login'),onTap: (){
+        setState(() {                       // ป๊อบอัพไปอีกหน้า
+          currenWidget = Information();     // ป๊อบอัพไปอีกหน้า
+        });                                 // ป๊อบอัพไปอีกหน้า
+        Navigator.of(context).pop();        // ป๊อบอัพไปอีกหน้า
+      },
+    );
+  }
+
+  Widget menuPost() {
+    return ListTile(
+      leading: Icon(
+        Icons.store,
+        color: Colors.greenAccent[400],
+      ),
+      title: Text('Post'),
+      subtitle: Text('Post the product'),onTap: (){
         setState(() {                       // ป๊อบอัพไปอีกหน้า
           currenWidget = Information();     // ป๊อบอัพไปอีกหน้า
         });                                 // ป๊อบอัพไปอีกหน้า
@@ -142,6 +159,7 @@ class _MyServiceState extends State<MyService> {
           myHeadDrawer(),
           menuShowListFood(), Divider(),      //ใส่เส้นแบ่ง
           menuInformation(), Divider(),
+          menuPost(), Divider(),
           processSignOut(),
         ],
       ),
