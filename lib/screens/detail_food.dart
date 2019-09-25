@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locater/models/food_model.dart';
 import 'package:locater/screens/my_style.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DetailFood extends StatefulWidget {
   final FoodModel foodModel;
@@ -14,6 +15,10 @@ class _DetailFoodState extends State<DetailFood> {
   // Explict
 
   FoodModel myFoodModel;
+  static const LatLng centerMap = const LatLng(13.650237, 100.628556);
+  CameraPosition cameraPosition = CameraPosition(
+      target: centerMap,
+      zoom: 16); // 0 = โลก , 20 = มองชิดโลก , 16 = มองระยะกลาง
 
   // Method
 
@@ -77,17 +82,36 @@ class _DetailFoodState extends State<DetailFood> {
     );
   }
 
+  Widget showMap() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.6,
+      height: MediaQuery.of(context).size.width * 0.5,
+      child: GoogleMap(
+        mapType: MapType.normal,
+        initialCameraPosition: cameraPosition,
+        onMapCreated: (GoogleMapController googleMapController) {},
+      ),
+    );
+  }
+
   Widget showDetail() {
     return ListView(
       padding: EdgeInsets.all(20.0),
       children: <Widget>[
         showNameFood(),
         showImageFood(),
-        showNameShop(),Divider(),
+        showNameShop(), Divider(),
         // SizedBox(height: 8.0,),  // ช่องว่างแยก
-        showAddressShop(),Divider(),
-        showTimeShop(),Divider(),
+        showAddressShop(), Divider(),
+        showTimeShop(), Divider(),
         showDetailFood(),
+        SizedBox(
+          height: 8.0,
+        ),
+        showMap(),
+        SizedBox(
+          height: 8.0,
+        ),
       ],
     );
   }
