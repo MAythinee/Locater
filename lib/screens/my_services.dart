@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:locater/screens/home.dart';
 import 'package:locater/screens/information.dart';
 import 'package:locater/screens/my_style.dart';
+import 'package:locater/screens/post.dart';
 import 'package:locater/screens/show_list_food.dart';
 
 
@@ -82,7 +83,7 @@ class _MyServiceState extends State<MyService> {
       title: Text('Post'),
       subtitle: Text('Post the product'),onTap: (){
         setState(() {                       // ป๊อบอัพไปอีกหน้า
-          currenWidget = Information();     // ป๊อบอัพไปอีกหน้า
+          currenWidget = Post();     // ป๊อบอัพไปอีกหน้า
         });                                 // ป๊อบอัพไปอีกหน้า
         Navigator.of(context).pop();        // ป๊อบอัพไปอีกหน้า
       },

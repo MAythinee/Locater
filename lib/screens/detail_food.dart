@@ -84,6 +84,7 @@ class _DetailFoodState extends State<DetailFood> {
         showNameFood(),
         showImageFood(),
         showNameShop(),Divider(),
+        // SizedBox(height: 8.0,),  // ช่องว่างแยก
         showAddressShop(),Divider(),
         showTimeShop(),Divider(),
         showDetailFood(),
