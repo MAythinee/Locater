@@ -32,7 +32,9 @@ class _AddFoodState extends State<AddFood> {
       validator: (String value) {
         if (value.isEmpty) {
           return 'กรุณากรอกชื่ออาหารด้วยค่ะ';
-        } else {}
+        } else {
+          return null;
+        }
       },
       onSaved: (String value) {},
     );
@@ -55,7 +57,9 @@ class _AddFoodState extends State<AddFood> {
       validator: (String value) {
         if (value.isEmpty) {
           return 'กรุณากรอกชื่อร้านอาหารด้วยค่ะ';
-        } else {}
+        } else {
+          return null;
+        }
       },
       onSaved: (String value) {},
     );
@@ -80,7 +84,9 @@ class _AddFoodState extends State<AddFood> {
       validator: (String value) {
         if (value.isEmpty) {
           return 'กรุณากรอกที่อยู่ร้านอาหารด้วยค่ะ';
-        } else {}
+        } else {
+          return null;
+        }
       },
       onSaved: (String value) {},
     );
@@ -105,7 +111,9 @@ class _AddFoodState extends State<AddFood> {
       validator: (String value) {
         if (value.isEmpty) {
           return 'กรุณากรอกรายละเอียดด้วยค่ะ';
-        } else {}
+        } else {
+          return null;
+        }
       },
       onSaved: (String value) {},
     );
@@ -162,9 +170,35 @@ class _AddFoodState extends State<AddFood> {
         onPressed: () {
           if (formKey.currentState.validate()) {
             formKey.currentState.save();
+            if (file == null) {
+              myAlert('ยังไม่ได้อัปโหลดรูปภาพค่ะ');
+            } else {
+              // upload
+            }
+          } else{
+            myAlert('กรอกข้อมูลไม่ครบค่ะ');
           }
         },
       ),
+    );
+  }
+
+  void myAlert(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('มีความผิดปกติเกิดขึ้น'),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                })
+          ],
+        );
+      },
     );
   }
 
