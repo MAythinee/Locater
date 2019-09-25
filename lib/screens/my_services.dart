@@ -2,10 +2,10 @@ import 'dart:ffi';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:locater/screens/addFood.dart';
 import 'package:locater/screens/home.dart';
 import 'package:locater/screens/information.dart';
 import 'package:locater/screens/my_style.dart';
-import 'package:locater/screens/post.dart';
 import 'package:locater/screens/show_list_food.dart';
 
 
@@ -74,16 +74,16 @@ class _MyServiceState extends State<MyService> {
     );
   }
 
-  Widget menuPost() {
+  Widget menuAddShop() {
     return ListTile(
       leading: Icon(
-        Icons.store,
+        Icons.add_circle,
         color: Colors.greenAccent[400],
       ),
-      title: Text('Post'),
-      subtitle: Text('Post the product'),onTap: (){
-        setState(() {                       // ป๊อบอัพไปอีกหน้า
-          currenWidget = Post();     // ป๊อบอัพไปอีกหน้า
+      title: Text('Add Shop'),
+      subtitle: Text('เพิ่มรายการ'),onTap: (){
+        setState(() {
+          currenWidget = AddFood();                       // ป๊อบอัพไปอีกหน้า          
         });                                 // ป๊อบอัพไปอีกหน้า
         Navigator.of(context).pop();        // ป๊อบอัพไปอีกหน้า
       },
@@ -158,9 +158,10 @@ class _MyServiceState extends State<MyService> {
       child: ListView(
         children: <Widget>[
           myHeadDrawer(),
-          menuShowListFood(), Divider(),      //ใส่เส้นแบ่ง
+          menuShowListFood(), Divider(), 
+          menuAddShop(), Divider(),       //ใส่เส้นแบ่ง
           menuInformation(), Divider(),
-          menuPost(), Divider(),
+          
           processSignOut(),
         ],
       ),
