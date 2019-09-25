@@ -15,18 +15,18 @@ class _DetailFoodState extends State<DetailFood> {
   // Explict
 
   FoodModel myFoodModel;
-  static const LatLng centerMap = const LatLng(13.650237, 100.628556);
-  CameraPosition cameraPosition = CameraPosition(
-      target: centerMap,
-      zoom: 16); // 0 = โลก , 20 = มองชิดโลก , 16 = มองระยะกลาง
+  double lat = 0, lng = 0;
 
   // Method
 
   @override
   void initState() {
     super.initState();
-
-    myFoodModel = widget.foodModel;
+    setState(() {
+      myFoodModel = widget.foodModel;
+      lat = double.parse(myFoodModel.lat);
+      lng = double.parse(myFoodModel.lng);
+    });
   }
 
   Widget showNameShop() {
@@ -82,7 +82,28 @@ class _DetailFoodState extends State<DetailFood> {
     );
   }
 
+  Set<Marker> myMarker() {
+    LatLng latLng = LatLng(lat, lng);
+
+    return <Marker>[
+      Marker(
+          position: latLng,
+          markerId: MarkerId('Shop'),
+          infoWindow: InfoWindow(
+            title: myFoodModel.nameShop, //กดตรง mark แล้วแสดงข้อมูล
+            snippet: myFoodModel.timeOpenClose,
+          ),)
+          // icon: BitmapDescriptor.defaultMarkerWithHue(200.0)), //เปลี่ยนสี mark
+    ].toSet();
+  }
+
   Widget showMap() {
+    LatLng centerMap = LatLng(lat, lng);
+    CameraPosition cameraPosition = CameraPosition(
+        target: centerMap,
+        zoom:
+            16); // ระยะเทียบกับการมองโลก 0 = โลก , 20 = มองชิดโลก , 16 = มองระยะกลาง
+
     return Container(
       width: MediaQuery.of(context).size.width * 0.6,
       height: MediaQuery.of(context).size.width * 0.5,
@@ -90,8 +111,16 @@ class _DetailFoodState extends State<DetailFood> {
         mapType: MapType.normal,
         initialCameraPosition: cameraPosition,
         onMapCreated: (GoogleMapController googleMapController) {},
+        markers: myMarker(),
       ),
     );
+  }
+
+  Widget showPostShop() {
+    return Text('Post by : ${myFoodModel.postBy}',
+        style: TextStyle(
+          fontSize: MyStyle().h2, color: Colors.red, fontWeight: FontWeight.bold,
+        ));
   }
 
   Widget showDetail() {
@@ -110,8 +139,8 @@ class _DetailFoodState extends State<DetailFood> {
         ),
         showMap(),
         SizedBox(
-          height: 8.0,
-        ),
+          height: 16.0,
+        ),showPostShop(),
       ],
     );
   }
