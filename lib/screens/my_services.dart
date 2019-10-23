@@ -1,4 +1,4 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +118,7 @@ class _MyServiceState extends State<MyService> {
 
   Widget showAppName() {
     return Text(
-      'Locater',
+      'Khai Khong',
       style: TextStyle(
           fontSize: MyStyle().h1,
           color: MyStyle().myTextColor,
@@ -160,7 +160,7 @@ class _MyServiceState extends State<MyService> {
           myHeadDrawer(),
           menuShowListFood(), Divider(), 
           menuAddShop(), Divider(),       //ใส่เส้นแบ่ง
-          menuInformation(), Divider(),
+          //menuInformation(), Divider(),
           
           processSignOut(),
         ],

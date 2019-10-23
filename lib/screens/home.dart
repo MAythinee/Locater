@@ -169,7 +169,7 @@ class _HomeState extends State<Home> {
 
   Widget showAppName() {
     return Text(
-      'LOCATER',
+      'KHAI KHONG',
       style: TextStyle(
         fontSize: 25.0,
         fontWeight: FontWeight.bold,

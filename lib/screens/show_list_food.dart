@@ -16,7 +16,6 @@ class _ShowListFoodState extends State<ShowListFood> {
 // Method
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     readFireStore();
   }
